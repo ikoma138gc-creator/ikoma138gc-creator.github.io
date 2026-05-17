@@ -381,9 +381,18 @@ footer {
 .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.7s, transform 0.7s; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
+.hamburger span { display:block; width:24px; height:2px; background:#fff; transition:all 0.3s; }
+.mobile-menu { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,15,26,0.97); z-index:200; flex-direction:column; align-items:center; justify-content:center; gap:32px; }
+.mobile-menu.open { display:flex; }
+.mobile-menu a { color:#fff; text-decoration:none; font-size:20px; letter-spacing:0.15em; font-family:'Shippori Mincho',serif; }
+.mobile-menu a:hover { color:var(--gold-light); }
+.mobile-close { position:absolute; top:24px; right:24px; background:none; border:none; color:#fff; font-size:28px; cursor:pointer; }
+
 @media(max-width:768px){
   nav{ padding:16px 24px; } nav.scrolled{ padding:12px 24px; }
   .nav-links{ display:none; }
+  .hamburger{ display:flex; }
   .hero-content{ padding:0 24px 0 48px; }
   .hero-rings{ display:none; }
   .hero-badge{ display:none; }
@@ -412,7 +421,20 @@ footer {
     <li><a href="#access">アクセス</a></li>
     <li><a href="ikoma_contact.html" class="nav-cta">お問い合わせ</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" id="mobile-close">✕</button>
+  <a href="#about" onclick="closeMobileMenu()">教会について</a>
+  <a href="ikoma_history.html">歴史</a>
+  <a href="ikoma_activities.html">地域活動</a>
+  <a href="ikoma_visit.html">参拝案内</a>
+  <a href="#access" onclick="closeMobileMenu()">アクセス</a>
+  <a href="ikoma_contact.html">お問い合わせ</a>
+</div>
 
 <!-- HERO with real photos slideshow -->
 <section class="hero" id="home">
@@ -531,6 +553,32 @@ footer {
   </div>
 </section>
 
+<!-- PAGE LINKS -->
+<section style="background:#1a1a2e; padding:60px 20px;">
+  <div style="max-width:900px; margin:0 auto; text-align:center;">
+    <p style="color:var(--gold); letter-spacing:0.3em; font-size:12px; margin-bottom:16px;">PAGES</p>
+    <h2 style="color:#fff; font-family:'Shippori Mincho',serif; font-size:1.6rem; margin-bottom:40px; letter-spacing:0.1em;">各ページへ</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px;">
+      <a href="ikoma_history.html" style="display:block; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3); border-radius:8px; padding:28px 16px; color:#fff; text-decoration:none; font-family:'Shippori Mincho',serif; font-size:1rem; letter-spacing:0.1em; transition:background 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+        <div style="color:var(--gold); font-size:24px; margin-bottom:12px;">📜</div>
+        歴史
+      </a>
+      <a href="ikoma_activities.html" style="display:block; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3); border-radius:8px; padding:28px 16px; color:#fff; text-decoration:none; font-family:'Shippori Mincho',serif; font-size:1rem; letter-spacing:0.1em; transition:background 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+        <div style="color:var(--gold); font-size:24px; margin-bottom:12px;">🤝</div>
+        地域活動
+      </a>
+      <a href="ikoma_visit.html" style="display:block; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3); border-radius:8px; padding:28px 16px; color:#fff; text-decoration:none; font-family:'Shippori Mincho',serif; font-size:1rem; letter-spacing:0.1em; transition:background 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+        <div style="color:var(--gold); font-size:24px; margin-bottom:12px;">⛩️</div>
+        参拝案内
+      </a>
+      <a href="ikoma_contact.html" style="display:block; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3); border-radius:8px; padding:28px 16px; color:#fff; text-decoration:none; font-family:'Shippori Mincho',serif; font-size:1rem; letter-spacing:0.1em; transition:background 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.2)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">
+        <div style="color:var(--gold); font-size:24px; margin-bottom:12px;">✉️</div>
+        お問い合わせ
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- GREETING -->
 <section class="section" id="about">
   <div class="section-inner">
@@ -635,6 +683,14 @@ new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
   }, {threshold: 0.12}).observe(el);
 });
+</script>
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileClose = document.getElementById('mobile-close');
+function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', closeMobileMenu);
 </script>
 </body>
 </html>
