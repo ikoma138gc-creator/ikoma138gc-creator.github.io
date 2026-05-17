@@ -269,7 +269,7 @@ footer { background: var(--deep); border-top: 0.5px solid rgba(201,168,76,0.2); 
     <h2 class="form-title">お問い合わせフォーム</h2>
     <p class="form-sub">以下のフォームに必要事項をご入力のうえ、送信してください。<br>通常2〜3営業日以内にご返信いたします。</p>
 
-    <form id="contact-form" onsubmit="handleSubmit(event)">
+    <form id="contact-form" action="https://formspree.io/ikoma138gc@gmail.com" method="POST">
 
       <!-- お問い合わせの種類 -->
       <div class="form-group">
@@ -500,27 +500,6 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Form submit
-function handleSubmit(e) {
-  e.preventDefault();
-  const form = document.getElementById('contact-form');
-  const btn = form.querySelector('.btn-submit');
-
-  // Validate
-  const radio = form.querySelector('input[name="inquiry_type"]:checked');
-  if (!radio) { alert('お問い合わせの種類を選択してください。'); return; }
-
-  // Animate button
-  btn.disabled = true;
-  btn.querySelector('span').textContent = '送信中...';
-
-  // Simulate send (replace with actual endpoint)
-  setTimeout(() => {
-    form.style.display = 'none';
-    document.getElementById('success-msg').classList.add('show');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 1200);
-}
 
 // Auto kana input hint
 document.getElementById('name').addEventListener('input', function() {
