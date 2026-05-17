@@ -269,7 +269,10 @@ footer { background: var(--deep); border-top: 0.5px solid rgba(201,168,76,0.2); 
     <h2 class="form-title">お問い合わせフォーム</h2>
     <p class="form-sub">以下のフォームに必要事項をご入力のうえ、送信してください。<br>通常2〜3営業日以内にご返信いたします。</p>
 
-    <form id="contact-form" action="https://formspree.io/ikoma138gc@gmail.com" method="POST">
+    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="3eaaaea6-2148-4bbf-9f19-5aa2c8ee8fbe">
+      <input type="hidden" name="subject" value="天理教生駒大教会 お問い合わせ">
+      <input type="hidden" name="redirect" value="https://ikoma138gc-creator.github.io/ikoma_contact.html?success=true">
 
       <!-- お問い合わせの種類 -->
       <div class="form-group">
