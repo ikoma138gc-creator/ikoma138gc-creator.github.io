@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ | 天理教生駒大教会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --deep: #0f0f1a;
+  --gold: #c9a84c;
+  --gold-light: #e8d5a3;
+  --mist: #f5f2ec;
+  --paper: #faf8f3;
+  --text: #2c2c3e;
+  --sub: #6b6b7e;
+  --border: #ddd8cc;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif; background: var(--paper); color: var(--text); overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(15,15,26,0.93); backdrop-filter: blur(12px); border-bottom: 0.5px solid rgba(201,168,76,0.2); }
+.nav-logo-main { font-family: 'Shippori Mincho', serif; font-size: 17px; font-weight: 700; color: #fff; letter-spacing: 0.08em; }
+.nav-logo-sub { font-size: 10px; color: var(--gold-light); letter-spacing: 0.15em; }
+.nav-back { font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; letter-spacing: 0.1em; transition: color .2s; }
+.nav-back:hover { color: var(--gold-light); }
+
+/* HERO */
+.hero { padding: 140px 0 72px; background: var(--ink); position: relative; overflow: hidden; }
+.hero::before { content: '問'; font-family: 'Shippori Mincho', serif; font-size: 300px; font-weight: 700; color: rgba(255,255,255,0.025); position: absolute; top: 50%; right: 40px; transform: translateY(-50%); pointer-events: none; line-height: 1; }
+.hero-vline { position: absolute; left: 44px; top: 20%; bottom: 20%; width: 0.5px; background: linear-gradient(to bottom, transparent, var(--gold) 30%, var(--gold) 70%, transparent); opacity: 0.45; }
+.hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 48px 0 100px; position: relative; z-index: 2; }
+.eyebrow { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 20px; opacity: 0; animation: fade-up .8s .3s forwards; }
+.hero-title { font-family: 'Shippori Mincho', serif; font-size: clamp(36px,5vw,58px); font-weight: 700; color: #fff; letter-spacing: 0.06em; line-height: 1.3; margin-bottom: 20px; opacity: 0; animation: fade-up .9s .5s forwards; }
+.hero-title span { color: var(--gold); }
+.hero-desc { font-size: 15px; color: rgba(255,255,255,0.62); line-height: 2.1; max-width: 520px; opacity: 0; animation: fade-up .9s .7s forwards; }
+
+/* INFO STRIP */
+.info-strip { background: var(--ink); border-bottom: 0.5px solid rgba(201,168,76,0.15); }
+.info-strip-inner { max-width: 1080px; margin: 0 auto; padding: 0 48px; display: flex; }
+.info-pill { display: flex; align-items: center; gap: 12px; padding: 20px 28px; border-right: 0.5px solid rgba(255,255,255,0.06); }
+.info-pill:first-child { padding-left: 0; }
+.info-pill:last-child { border-right: none; }
+.info-pill-icon { font-size: 18px; color: var(--gold); flex-shrink: 0; }
+.info-pill-label { font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.12em; margin-bottom: 3px; }
+.info-pill-val { font-size: 13px; color: rgba(255,255,255,0.8); letter-spacing: 0.06em; }
+.info-pill-val a { color: var(--gold); text-decoration: none; }
+
+/* MAIN LAYOUT */
+.main-wrap { max-width: 1080px; margin: 0 auto; padding: 80px 48px; display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: start; }
+
+/* FORM */
+.form-title { font-family: 'Shippori Mincho', serif; font-size: 26px; font-weight: 700; color: var(--ink); letter-spacing: 0.05em; margin-bottom: 8px; }
+.form-sub { font-size: 13px; color: var(--sub); line-height: 1.9; margin-bottom: 40px; }
+
+.form-group { margin-bottom: 28px; }
+.form-label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink); letter-spacing: 0.06em; margin-bottom: 8px; font-weight: 500; }
+.required-badge { font-size: 10px; background: rgba(201,168,76,0.12); color: var(--gold); border: 0.5px solid rgba(201,168,76,0.3); padding: 1px 7px; border-radius: 20px; letter-spacing: 0.08em; }
+.optional-badge { font-size: 10px; background: rgba(0,0,0,0.05); color: var(--sub); padding: 1px 7px; border-radius: 20px; letter-spacing: 0.08em; }
+
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 0.5px solid var(--border);
+  border-radius: 2px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  color: var(--text);
+  background: white;
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
+  appearance: none;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+}
+.form-input::placeholder, .form-textarea::placeholder { color: #bbb8b2; font-size: 13px; }
+.form-textarea { min-height: 160px; resize: vertical; line-height: 1.8; }
+
+.form-select-wrap { position: relative; }
+.form-select-wrap::after { content: '›'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%) rotate(90deg); font-size: 18px; color: var(--sub); pointer-events: none; }
+
+/* Radio group */
+.radio-group { display: flex; flex-direction: column; gap: 10px; }
+.radio-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.radio-item input[type="radio"] { display: none; }
+.radio-custom { width: 18px; height: 18px; border-radius: 50%; border: 0.5px solid var(--border); background: white; flex-shrink: 0; position: relative; transition: border-color .2s; }
+.radio-item input[type="radio"]:checked + .radio-custom { border-color: var(--gold); }
+.radio-item input[type="radio"]:checked + .radio-custom::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+.radio-label { font-size: 14px; color: var(--text); }
+
+/* Checkbox */
+.check-item { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+.check-item input[type="checkbox"] { display: none; }
+.check-custom { width: 18px; height: 18px; min-width: 18px; border-radius: 3px; border: 0.5px solid var(--border); background: white; flex-shrink: 0; position: relative; transition: all .2s; margin-top: 1px; }
+.check-item input[type="checkbox"]:checked + .check-custom { border-color: var(--gold); background: var(--gold); }
+.check-item input[type="checkbox"]:checked + .check-custom::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 11px; color: white; }
+.check-label { font-size: 13px; color: var(--text); line-height: 1.7; }
+.check-label a { color: var(--gold); }
+
+/* Submit */
+.submit-wrap { margin-top: 36px; }
+.btn-submit {
+  width: 100%;
+  padding: 20px;
+  background: var(--ink);
+  color: white;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-submit::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; right: 100%; bottom: 0;
+  background: var(--gold);
+  transition: left .4s, right .4s;
+}
+.btn-submit:hover::before { left: 0; right: 0; }
+.btn-submit span { position: relative; z-index: 1; }
+.btn-submit:hover { transform: translateY(-1px); }
+.btn-submit:active { transform: translateY(0); }
+
+.form-note { font-size: 12px; color: var(--sub); line-height: 1.8; margin-top: 16px; letter-spacing: 0.04em; }
+
+/* SUCCESS STATE */
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 48px 32px;
+  background: white;
+  border: 0.5px solid rgba(201,168,76,0.2);
+  border-radius: 4px;
+}
+.success-msg.show { display: block; }
+.success-icon { font-size: 48px; margin-bottom: 20px; }
+.success-title { font-family: 'Shippori Mincho', serif; font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.success-body { font-size: 14px; color: var(--sub); line-height: 2; }
+
+/* SIDEBAR */
+.sidebar { position: sticky; top: 100px; }
+
+.side-card {
+  background: var(--ink);
+  border: 0.5px solid rgba(201,168,76,0.2);
+  border-radius: 4px;
+  padding: 28px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.side-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); opacity: 0.6; }
+.side-card-title { font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 20px; letter-spacing: 0.06em; }
+.side-info-item { display: flex; gap: 12px; margin-bottom: 16px; }
+.side-info-item:last-child { margin-bottom: 0; }
+.side-info-icon { font-size: 16px; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+.side-info-label { font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.12em; margin-bottom: 3px; }
+.side-info-val { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.7; }
+.side-info-val a { color: var(--gold); text-decoration: none; }
+
+.map-wrap { border-radius: 4px; overflow: hidden; height: 200px; }
+.map-wrap iframe { width: 100%; height: 100%; border: none; }
+
+.side-faq { background: var(--mist); border-radius: 4px; padding: 24px 28px; }
+.side-faq-title { font-size: 12px; font-weight: 500; color: var(--ink); letter-spacing: 0.1em; margin-bottom: 16px; }
+.faq-item { border-bottom: 0.5px solid var(--border); padding: 12px 0; }
+.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+.faq-q { font-size: 12px; color: var(--ink); font-weight: 500; margin-bottom: 5px; display: flex; align-items: baseline; gap: 6px; }
+.faq-q::before { content: 'Q'; font-family: 'Shippori Mincho', serif; font-size: 14px; color: var(--gold); flex-shrink: 0; }
+.faq-a { font-size: 12px; color: var(--sub); line-height: 1.7; display: flex; gap: 6px; }
+.faq-a::before { content: 'A'; font-family: 'Shippori Mincho', serif; font-size: 14px; color: var(--sub); flex-shrink: 0; }
+
+/* FOOTER */
+footer { background: var(--deep); border-top: 0.5px solid rgba(201,168,76,0.2); padding: 44px 0 24px; }
+.ft-inner { max-width: 1080px; margin: 0 auto; padding: 0 48px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.ft-logo { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 0.08em; margin-bottom: 4px; }
+.ft-sub { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; }
+.ft-info { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 2; text-align: right; }
+.ft-info a { color: var(--gold); text-decoration: none; }
+.ft-copy { max-width: 1080px; margin: 20px auto 0; padding: 16px 48px 0; border-top: 0.5px solid rgba(255,255,255,0.08); font-size: 11px; color: rgba(255,255,255,0.22); }
+
+@keyframes fade-up { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .hero-inner, .main-wrap, .info-strip-inner, .ft-inner { padding-left: 20px; padding-right: 20px; }
+  .hero-inner { padding-left: 44px; }
+  .main-wrap { grid-template-columns: 1fr; gap: 40px; padding: 48px 20px; }
+  .sidebar { position: static; }
+  .info-strip-inner { flex-direction: column; gap: 0; }
+  .info-pill { border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.06); padding: 14px 0; }
+  .ft-inner { flex-direction: column; }
+  .ft-info { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <div class="nav-logo-main">天理教 生駒大教会</div>
+    <div class="nav-logo-sub">TENRIKYO IKOMA GRAND CHURCH</div>
+  </div>
+  <a href="ikoma_homepage.html" class="nav-back">← トップページへ</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-vline"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">CONTACT / お問い合わせ</p>
+    <h1 class="hero-title">どうぞ、<br>お気軽に<span>ご連絡</span>ください。</h1>
+    <p class="hero-desc">参拝のご見学・行事へのご参加・天理教に関するご質問など、どんなことでもお受けしています。担当者より折り返しご連絡いたします。</p>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="info-strip-inner">
+    <div class="info-pill">
+      <div class="info-pill-icon">📞</div>
+      <div>
+        <div class="info-pill-label">お電話</div>
+        <div class="info-pill-val"><a href="tel:0743736031">0743-73-6031</a></div>
+      </div>
+    </div>
+    <div class="info-pill">
+      <div class="info-pill-icon">📅</div>
+      <div>
+        <div class="info-pill-label">月次祭</div>
+        <div class="info-pill-val">毎月24日 午前10時〜</div>
+      </div>
+    </div>
+    <div class="info-pill">
+      <div class="info-pill-icon">📍</div>
+      <div>
+        <div class="info-pill-label">住所</div>
+        <div class="info-pill-val">奈良県生駒市谷田町820番地</div>
+      </div>
+    </div>
+    <div class="info-pill">
+      <div class="info-pill-icon">🚃</div>
+      <div>
+        <div class="info-pill-label">アクセス</div>
+        <div class="info-pill-val">近鉄生駒駅 北口より徒歩約7分</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+  <!-- FORM -->
+  <div class="reveal">
+    <h2 class="form-title">お問い合わせフォーム</h2>
+    <p class="form-sub">以下のフォームに必要事項をご入力のうえ、送信してください。<br>通常2〜3営業日以内にご返信いたします。</p>
+
+    <form id="contact-form" onsubmit="handleSubmit(event)">
+
+      <!-- お問い合わせの種類 -->
+      <div class="form-group">
+        <label class="form-label">
+          お問い合わせの種類
+          <span class="required-badge">必須</span>
+        </label>
+        <div class="radio-group">
+          <label class="radio-item">
+            <input type="radio" name="inquiry_type" value="参拝・見学のご相談" required>
+            <span class="radio-custom"></span>
+            <span class="radio-label">参拝・見学のご相談</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="inquiry_type" value="行事・月次祭について">
+            <span class="radio-custom"></span>
+            <span class="radio-label">行事・月次祭について</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="inquiry_type" value="おかえり食堂への参加・ボランティア">
+            <span class="radio-custom"></span>
+            <span class="radio-label">おかえり食堂への参加・ボランティア</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="inquiry_type" value="天理教・信仰についての質問">
+            <span class="radio-custom"></span>
+            <span class="radio-label">天理教・信仰についての質問</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="inquiry_type" value="その他">
+            <span class="radio-custom"></span>
+            <span class="radio-label">その他</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- お名前 -->
+      <div class="form-group">
+        <label class="form-label" for="name">
+          お名前
+          <span class="required-badge">必須</span>
+        </label>
+        <input type="text" id="name" name="name" class="form-input"
+          placeholder="例：山田 太郎" required>
+      </div>
+
+      <!-- ふりがな -->
+      <div class="form-group">
+        <label class="form-label" for="kana">
+          ふりがな
+          <span class="optional-badge">任意</span>
+        </label>
+        <input type="text" id="kana" name="kana" class="form-input"
+          placeholder="例：やまだ たろう">
+      </div>
+
+      <!-- 連絡先（メールまたは電話） -->
+      <div class="form-group">
+        <label class="form-label" for="email">
+          メールアドレス
+          <span class="required-badge">必須</span>
+        </label>
+        <input type="email" id="email" name="email" class="form-input"
+          placeholder="例：example@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="tel">
+          電話番号
+          <span class="optional-badge">任意</span>
+        </label>
+        <input type="tel" id="tel" name="tel" class="form-input"
+          placeholder="例：0743-00-0000">
+      </div>
+
+      <!-- お住まい（任意） -->
+      <div class="form-group">
+        <label class="form-label" for="area">
+          お住まいの地域
+          <span class="optional-badge">任意</span>
+        </label>
+        <div class="form-select-wrap">
+          <select id="area" name="area" class="form-select">
+            <option value="">選択してください</option>
+            <option>生駒市内</option>
+            <option>奈良市・大和郡山市</option>
+            <option>大阪府</option>
+            <option>その他近畿</option>
+            <option>その他</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- メッセージ -->
+      <div class="form-group">
+        <label class="form-label" for="message">
+          お問い合わせ内容
+          <span class="required-badge">必須</span>
+        </label>
+        <textarea id="message" name="message" class="form-textarea"
+          placeholder="ご質問・ご相談の内容をご自由にお書きください。&#10;&#10;例）月次祭の見学について詳しく教えてください。" required></textarea>
+      </div>
+
+      <!-- 個人情報同意 -->
+      <div class="form-group">
+        <label class="check-item">
+          <input type="checkbox" id="privacy" required>
+          <span class="check-custom"></span>
+          <span class="check-label">
+            お送りいただいた個人情報は、お問い合わせへの対応のみに使用し、
+            第三者への提供は一切行いません。
+            <a href="#">個人情報の取り扱いについて</a>に同意します。
+            <span class="required-badge" style="margin-left:6px">必須</span>
+          </span>
+        </label>
+      </div>
+
+      <!-- Submit -->
+      <div class="submit-wrap">
+        <button type="submit" class="btn-submit">
+          <span>送　信　す　る</span>
+        </button>
+        <p class="form-note">
+          ※ 送信後、確認メールをお送りします。届かない場合はお電話にてご連絡ください。<br>
+          ※ お急ぎの方は直接お電話（0743-73-6031）にてご連絡ください。
+        </p>
+      </div>
+
+    </form>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="success-msg" id="success-msg">
+      <div class="success-icon">🙏</div>
+      <div class="success-title">お問い合わせを受け付けました</div>
+      <p class="success-body">
+        ご連絡いただきありがとうございます。<br>
+        担当者より2〜3営業日以内にご返信いたします。<br><br>
+        お急ぎの場合は、お電話にてお問い合わせください。<br>
+        <strong>0743-73-6031</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar reveal" style="transition-delay:.15s">
+    <!-- 教会情報 -->
+    <div class="side-card">
+      <div class="side-card-title">教会へのご連絡</div>
+      <div class="side-info-item">
+        <div class="side-info-icon">📞</div>
+        <div>
+          <div class="side-info-label">お電話</div>
+          <div class="side-info-val"><a href="tel:0743736031">0743-73-6031</a></div>
+        </div>
+      </div>
+      <div class="side-info-item">
+        <div class="side-info-icon">📍</div>
+        <div>
+          <div class="side-info-label">住所</div>
+          <div class="side-info-val">〒630-0251<br>奈良県生駒市谷田町820番地</div>
+        </div>
+      </div>
+      <div class="side-info-item">
+        <div class="side-info-icon">🚃</div>
+        <div>
+          <div class="side-info-label">電車</div>
+          <div class="side-info-val">近鉄生駒線・生駒駅<br>北口より徒歩約7分</div>
+        </div>
+      </div>
+      <div class="side-info-item">
+        <div class="side-info-icon">📅</div>
+        <div>
+          <div class="side-info-label">月次祭</div>
+          <div class="side-info-val">毎月24日 午前10時〜<br>（服装自由・予約不要）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 地図 -->
+    <div class="map-wrap" style="margin-bottom:16px">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d826.1!2d135.6990!3d34.6945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000eff9bdffc001%3A0x0!2z5aWI55yM55yM55Sw5aSn5aSn6aaZ6aaZ!5e0!3m2!1sja!2sjp!4v1"
+        title="生駒大教会 地図" loading="lazy"></iframe>
+    </div>
+
+    <!-- FAQ -->
+    <div class="side-faq">
+      <div class="side-faq-title">よくあるご質問</div>
+      <div class="faq-item">
+        <div class="faq-q">参拝に費用はかかりますか？</div>
+        <div class="faq-a">参拝は無料です。お布施などは不要です。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">信者でなくても来られますか？</div>
+        <div class="faq-a">はい、どなたでも歓迎しています。見学だけでも構いません。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">入信を勧められますか？</div>
+        <div class="faq-a">無理にお誘いすることは一切ありません。ご安心ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">返信はいつ頃来ますか？</div>
+        <div class="faq-a">通常2〜3営業日以内にご返信いたします。急ぎの場合はお電話ください。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-inner">
+    <div>
+      <div class="ft-logo">天理教 生駒大教会</div>
+      <div class="ft-sub">TENRIKYO IKOMA GRAND CHURCH</div>
+    </div>
+    <div class="ft-info">
+      〒630-0251 奈良県生駒市谷田町820番地<br>
+      TEL：<a href="tel:0743736031">0743-73-6031</a><br>
+      近鉄生駒駅 北口より徒歩約7分
+    </div>
+  </div>
+  <div class="ft-copy">&copy; 天理教生駒大教会 All rights reserved.</div>
+</footer>
+
+<script>
+// Reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Form submit
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('contact-form');
+  const btn = form.querySelector('.btn-submit');
+
+  // Validate
+  const radio = form.querySelector('input[name="inquiry_type"]:checked');
+  if (!radio) { alert('お問い合わせの種類を選択してください。'); return; }
+
+  // Animate button
+  btn.disabled = true;
+  btn.querySelector('span').textContent = '送信中...';
+
+  // Simulate send (replace with actual endpoint)
+  setTimeout(() => {
+    form.style.display = 'none';
+    document.getElementById('success-msg').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 1200);
+}
+
+// Auto kana input hint
+document.getElementById('name').addEventListener('input', function() {
+  // Optional: auto suggest kana
+});
+</script>
+</body>
+</html>

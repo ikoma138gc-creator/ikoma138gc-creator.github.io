@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参拝のご案内 | 天理教生駒大教会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --deep: #0f0f1a;
+  --gold: #c9a84c;
+  --gold-light: #e8d5a3;
+  --mist: #f5f2ec;
+  --paper: #faf8f3;
+  --text: #2c2c3e;
+  --sub: #6b6b7e;
+  --warm: #8b5e3c;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif; background: var(--paper); color: var(--text); overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(15,15,26,0.93); backdrop-filter: blur(12px); border-bottom: 0.5px solid rgba(201,168,76,0.2); }
+.nav-logo-main { font-family: 'Shippori Mincho', serif; font-size: 17px; font-weight: 700; color: #fff; letter-spacing: 0.08em; }
+.nav-logo-sub { font-size: 10px; color: var(--gold-light); letter-spacing: 0.15em; }
+.nav-back { font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+.nav-back:hover { color: var(--gold-light); }
+
+/* HERO */
+.hero { padding: 140px 0 80px; background: var(--ink); position: relative; overflow: hidden; }
+.hero::before { content: '参'; font-family: 'Shippori Mincho', serif; font-size: 340px; font-weight: 700; color: rgba(255,255,255,0.03); position: absolute; top: 50%; right: 40px; transform: translateY(-50%); pointer-events: none; line-height: 1; }
+.hero-vline { position: absolute; left: 44px; top: 20%; bottom: 20%; width: 0.5px; background: linear-gradient(to bottom, transparent, var(--gold) 30%, var(--gold) 70%, transparent); opacity: 0.45; }
+.hero-inner { max-width: 1080px; margin: 0 auto; padding: 0 48px 0 100px; position: relative; z-index: 2; }
+.eyebrow { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 20px; }
+.hero-title { font-family: 'Shippori Mincho', serif; font-size: clamp(36px,5vw,60px); font-weight: 700; color: #fff; letter-spacing: 0.06em; line-height: 1.3; margin-bottom: 20px; }
+.hero-title span { color: var(--gold); }
+.hero-desc { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 2; max-width: 520px; }
+
+/* FAQ STRIP */
+.faq-strip { background: rgba(201,168,76,0.08); border-top: 0.5px solid rgba(201,168,76,0.2); border-bottom: 0.5px solid rgba(201,168,76,0.15); padding: 20px 0; background: var(--ink); }
+.faq-inner { max-width: 1080px; margin: 0 auto; padding: 0 48px; display: flex; gap: 0; flex-wrap: wrap; }
+.faq-pill { display: flex; align-items: center; gap: 10px; padding: 10px 24px; border-right: 0.5px solid rgba(255,255,255,0.08); }
+.faq-pill:last-child { border-right: none; }
+.faq-q { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; }
+.faq-a { font-size: 12px; color: var(--gold); font-weight: 500; letter-spacing: 0.06em; }
+
+/* SECTIONS */
+.sec { padding: 96px 0; }
+.inner { max-width: 1080px; margin: 0 auto; padding: 0 48px; }
+.dark { background: var(--ink); }
+.mist { background: var(--mist); }
+.sec-eye { display: flex; align-items: center; gap: 16px; margin-bottom: 44px; }
+.eye-line { height: 0.5px; width: 40px; background: var(--gold); }
+.eye-text { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); }
+
+/* ── STEPS ── */
+.steps-intro { font-size: 15px; color: var(--sub); line-height: 2; max-width: 640px; margin-bottom: 60px; }
+
+.steps-grid { display: flex; flex-direction: column; gap: 0; }
+
+.step-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 40px;
+  position: relative;
+}
+
+/* Vertical connector line between steps */
+.step-item:not(:last-child) .step-num-col::after {
+  content: '';
+  position: absolute;
+  left: 40px;
+  top: 80px;
+  bottom: -1px;
+  width: 0.5px;
+  background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.2));
+}
+
+.step-num-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 48px;
+}
+
+.step-num-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 0.5px solid var(--gold);
+  background: rgba(201,168,76,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.step-num-ja { font-size: 9px; color: var(--gold); letter-spacing: 0.15em; }
+.step-num-digit { font-family: 'Shippori Mincho', serif; font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1; }
+
+.step-body {
+  padding: 16px 0 48px;
+}
+
+.step-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--ink); letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.step-desc {
+  font-size: 14px; color: var(--sub); line-height: 2;
+  margin-bottom: 16px;
+  max-width: 560px;
+}
+
+.step-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+/* Hand gesture illustration */
+.gesture {
+  width: 80px;
+  height: 60px;
+  background: var(--mist);
+  border-radius: 8px;
+  border: 0.5px solid rgba(139,94,60,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--warm);
+  background: rgba(139,94,60,0.07);
+  border: 0.5px solid rgba(139,94,60,0.15);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+/* count badge */
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gold);
+  background: rgba(201,168,76,0.1);
+  border: 0.5px solid rgba(201,168,76,0.3);
+  border-radius: 4px;
+  padding: 4px 12px;
+  margin-bottom: 10px;
+}
+.count-badge span { font-family: 'Shippori Mincho', serif; font-size: 22px; font-weight: 700; line-height: 1; }
+
+/* ── OVERVIEW CARD ── */
+.overview-card {
+  background: var(--ink);
+  border: 0.5px solid rgba(201,168,76,0.2);
+  border-radius: 4px;
+  padding: 40px 48px;
+  margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+.overview-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.ov-item { }
+.ov-label { font-size: 10px; letter-spacing: 0.2em; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+.ov-val { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 0.06em; line-height: 1.5; }
+.ov-sub { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 4px; line-height: 1.7; }
+
+/* ── FLOW OVERVIEW ── */
+.flow-overview {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--mist);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 64px;
+}
+.flow-step {
+  flex: 1;
+  padding: 20px 16px;
+  text-align: center;
+  position: relative;
+}
+.flow-step::after {
+  content: '›';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--gold);
+  opacity: 0.6;
+  z-index: 1;
+}
+.flow-step:last-child::after { display: none; }
+.flow-step-num { font-size: 10px; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 6px; }
+.flow-step-text { font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: 0.06em; line-height: 1.4; }
+
+/* ── INFO CARDS ── */
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.info-card {
+  background: var(--color, var(--paper));
+  border: 0.5px solid var(--border-color, rgba(201,168,76,0.2));
+  border-radius: 4px;
+  padding: 24px;
+}
+.info-card-icon { font-size: 22px; color: var(--gold); margin-bottom: 12px; }
+.info-card-title { font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; letter-spacing: 0.05em; }
+.info-card-body { font-size: 13px; color: var(--sub); line-height: 1.9; }
+.info-card-body strong { color: var(--ink); font-weight: 500; }
+
+/* ── ACCESS ── */
+.access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.access-map {
+  aspect-ratio: 4/3;
+  background: rgba(255,255,255,0.05);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.access-map iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.3) contrast(1.1); }
+
+.access-info-list { display: flex; flex-direction: column; gap: 20px; }
+.access-info-item { display: flex; gap: 16px; }
+.access-info-icon { font-size: 18px; color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+.access-info-title { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; margin-bottom: 4px; }
+.access-info-val { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.8; letter-spacing: 0.04em; }
+.access-info-val a { color: var(--gold); text-decoration: none; }
+
+/* ── CTA ── */
+.cta-sec { padding: 80px 0; text-align: center; background: var(--paper); }
+.cta-sec h2 { font-family: 'Shippori Mincho', serif; font-size: 28px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 12px; color: var(--ink); }
+.cta-sec p { font-size: 14px; color: var(--sub); line-height: 2; margin-bottom: 36px; }
+.btn-dark { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 0.15em; padding: 16px 44px; border-radius: 2px; text-decoration: none; transition: background .2s, transform .2s; }
+.btn-dark:hover { background: var(--deep); transform: translateY(-2px); }
+
+/* FOOTER */
+footer { background: var(--deep); border-top: 0.5px solid rgba(201,168,76,0.2); padding: 44px 0 24px; }
+.ft-inner { max-width: 1080px; margin: 0 auto; padding: 0 48px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.ft-logo { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 0.08em; margin-bottom: 4px; }
+.ft-sub { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; }
+.ft-info { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 2; text-align: right; }
+.ft-info a { color: var(--gold); text-decoration: none; }
+.ft-copy { max-width: 1080px; margin: 20px auto 0; padding: 16px 48px 0; border-top: 0.5px solid rgba(255,255,255,0.08); font-size: 11px; color: rgba(255,255,255,0.22); }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s, transform 0.7s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+@keyframes fade-up { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+@media (max-width: 768px) {
+  nav, .hero-inner, .inner, .ft-inner { padding-left: 20px; padding-right: 20px; }
+  .hero-inner { padding-left: 44px; }
+  .step-item { grid-template-columns: 60px 1fr; gap: 0 20px; }
+  .step-num-circle { width: 60px; height: 60px; }
+  .step-num-digit { font-size: 22px; }
+  .step-item:not(:last-child) .step-num-col::after { left: 30px; }
+  .overview-grid { grid-template-columns: 1fr; gap: 20px; }
+  .access-grid { grid-template-columns: 1fr; }
+  .flow-overview { flex-direction: column; gap: 0; }
+  .flow-step::after { display: none; }
+  .ft-inner { flex-direction: column; }
+  .ft-info { text-align: left; }
+  .faq-inner { flex-direction: column; }
+  .faq-pill { border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.08); padding: 10px 0; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <div class="nav-logo-main">天理教 生駒大教会</div>
+    <div class="nav-logo-sub">TENRIKYO IKOMA GRAND CHURCH</div>
+  </div>
+  <a href="ikoma_homepage.html" class="nav-back">← トップページへ</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-vline"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">VISIT GUIDE / 参拝のご案内</p>
+    <h1 class="hero-title">初めての方も、<br><span>お気軽に</span>どうぞ。</h1>
+    <p class="hero-desc">天理教生駒大教会は、信者以外の方もどなたでもお参りいただける、開かれた教会です。服装の決まりもありません。このページでは、参拝の流れと作法をやさしくご案内します。</p>
+  </div>
+</section>
+
+<!-- FAQ STRIP -->
+<div class="faq-strip">
+  <div class="faq-inner">
+    <div class="faq-pill">
+      <span class="faq-q">信者でないと入れない？</span>
+      <span class="faq-a">→ 誰でもOKです</span>
+    </div>
+    <div class="faq-pill">
+      <span class="faq-q">服装は？</span>
+      <span class="faq-a">→ 普段着で大丈夫</span>
+    </div>
+    <div class="faq-pill">
+      <span class="faq-q">お布施は必要？</span>
+      <span class="faq-a">→ 不要です</span>
+    </div>
+    <div class="faq-pill">
+      <span class="faq-q">入信を勧められる？</span>
+      <span class="faq-a">→ 勧誘は一切しません</span>
+    </div>
+    <div class="faq-pill">
+      <span class="faq-q">予約は必要？</span>
+      <span class="faq-a">→ 不要、直接お越しください</span>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="sec-eye">
+      <div class="eye-line"></div>
+      <span class="eye-text">OVERVIEW / 参拝の基本情報</span>
+    </div>
+    <div class="overview-card reveal">
+      <div class="overview-grid">
+        <div class="ov-item">
+          <div class="ov-label">月次祭（定例参拝）</div>
+          <div class="ov-val">毎月24日<br>午前10時〜</div>
+          <div class="ov-sub">服装自由・予約不要<br>所要時間：約60〜90分</div>
+        </div>
+        <div class="ov-item">
+          <div class="ov-label">自由参拝</div>
+          <div class="ov-val">随時受付</div>
+          <div class="ov-sub">月次祭以外の日も<br>お参りいただけます<br>まずはお電話ください</div>
+        </div>
+        <div class="ov-item">
+          <div class="ov-label">お問い合わせ</div>
+          <div class="ov-val">0743-73-6031</div>
+          <div class="ov-sub">見学・相談・ご不明な点など<br>お気軽にご連絡ください</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flow overview -->
+    <div class="sec-eye">
+      <div class="eye-line"></div>
+      <span class="eye-text">FLOW / 参拝の流れ（概要）</span>
+    </div>
+    <div class="flow-overview reveal">
+      <div class="flow-step">
+        <div class="flow-step-num">STEP 1</div>
+        <div class="flow-step-text">到着・<br>受付にひと声</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">STEP 2</div>
+        <div class="flow-step-text">礼拝の場へ<br>ご案内</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">STEP 3</div>
+        <div class="flow-step-text">おつとめを<br>拝聴</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">STEP 4</div>
+        <div class="flow-step-text">神前にて<br>ご参拝</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">STEP 5</div>
+        <div class="flow-step-text">お茶・<br>お話（任意）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAHO STEPS -->
+<section class="sec mist" id="saho">
+  <div class="inner">
+    <div class="sec-eye">
+      <div class="eye-line"></div>
+      <span class="eye-text">SAHO / 参拝の作法・手順</span>
+    </div>
+    <p class="steps-intro reveal">
+      天理教の参拝には、独自の作法があります。初めての方もご安心ください。
+      わからない場合は、その場にいる奉仕員にお気軽にお尋ねください。
+    </p>
+
+    <div class="steps-grid">
+
+      <!-- STEP 1 -->
+      <div class="step-item reveal">
+        <div class="step-num-col">
+          <div class="step-num-circle">
+            <span class="step-num-ja">作法</span>
+            <span class="step-num-digit">1</span>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">神前に進み、<br>両手をついて一拝する</div>
+          <p class="step-desc">神前（ご本尊の前）まで進んだら、畳の上に両手をつき、頭を深く下げて一礼します。心を静めて、神様の前に立つ気持ちでどうぞ。</p>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <svg width="72" height="56" viewBox="0 0 72 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="background:white;border-radius:8px;border:0.5px solid rgba(139,94,60,0.15);padding:4px">
+              <ellipse cx="36" cy="14" rx="10" ry="12" fill="#f0c8a0" stroke="#8b5e3c" stroke-width="0.8"/>
+              <path d="M20 44 Q36 28 52 44" fill="none" stroke="#8b5e3c" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="12" y1="44" x2="60" y2="44" stroke="#8b5e3c" stroke-width="0.8" stroke-dasharray="3 2"/>
+              <path d="M24 44 L18 50 M48 44 L54 50" stroke="#8b5e3c" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <div class="step-note">頭を深く、丁寧に</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step-item reveal">
+        <div class="step-num-col">
+          <div class="step-num-circle">
+            <span class="step-num-ja">作法</span>
+            <span class="step-num-digit">2</span>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">頭を上げて、<br>4回手をたたく</div>
+          <p class="step-desc">一礼のあと頭を上げ、両手を胸の前で4回たたきます。神様への敬意を表す大切な動作です。</p>
+          <div class="count-badge"><span>4</span>回 手を合わせてたたく</div>
+          <br>
+          <div class="step-note">拍手は柏手（かしわで）と呼ばれます</div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-item reveal">
+        <div class="step-num-col">
+          <div class="step-num-circle">
+            <span class="step-num-ja">作法</span>
+            <span class="step-num-digit">3</span>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">再び両手をついて礼拝する<br>（お願い・お礼を申し上げる）</div>
+          <p class="step-desc">もう一度両手をついて深く礼拝します。このとき、神様へのお願いや感謝の気持ちを心の中で申し上げてください。言葉は心の中で、自由な言葉でかまいません。</p>
+          <div class="step-note">感謝の気持ちや、日々のお願いを自由に</div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step-item reveal">
+        <div class="step-num-col">
+          <div class="step-num-circle">
+            <span class="step-num-ja">作法</span>
+            <span class="step-num-digit">4</span>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">頭を上げて、<br>再び4回手をたたく</div>
+          <p class="step-desc">礼拝が終わったら頭を上げ、もう一度4回手をたたきます。最初の拍手と同じ動作です。</p>
+          <div class="count-badge"><span>4</span>回 再び拍手</div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step-item reveal">
+        <div class="step-num-col">
+          <div class="step-num-circle">
+            <span class="step-num-ja">作法</span>
+            <span class="step-num-digit">5</span>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">最後に両手をついて、<br>一礼して完了</div>
+          <p class="step-desc">最後にもう一度両手をついて一礼し、参拝の完了です。ゆっくりと立ち上がり、静かに退きます。参拝後は奉仕員に声をかけていただければ、お茶を一緒にいただきながらお話しすることもできます。</p>
+          <div class="step-note">これで参拝の完了です。お疲れさまでした</div>
+        </div>
+      </div>
+
+    </div><!-- /steps-grid -->
+
+    <!-- Summary flow -->
+    <div style="margin-top:48px;background:white;border:0.5px solid rgba(139,94,60,0.15);border-radius:4px;padding:28px 32px;" class="reveal">
+      <div style="font-size:12px;color:var(--sub);letter-spacing:0.12em;margin-bottom:16px">参拝の作法まとめ</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text)">
+          <span style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,0.12);border:0.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);font-weight:500;flex-shrink:0">1</span>
+          両手をついて一拝
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text)">
+          <span style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,0.12);border:0.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);font-weight:500;flex-shrink:0">2</span>
+          頭を上げて4回拍手
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text)">
+          <span style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,0.12);border:0.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);font-weight:500;flex-shrink:0">3</span>
+          両手をついて礼拝（お願い・感謝）
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text)">
+          <span style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,0.12);border:0.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);font-weight:500;flex-shrink:0">4</span>
+          頭を上げて4回拍手
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text)">
+          <span style="width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,0.12);border:0.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);font-weight:500;flex-shrink:0">5</span>
+          両手をついて一拝して完了
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO CARDS -->
+<section class="sec" style="background:var(--paper)">
+  <div class="inner">
+    <div class="sec-eye">
+      <div class="eye-line"></div>
+      <span class="eye-text">FAQ / よくあるご質問</span>
+    </div>
+    <div class="info-grid reveal">
+      <div class="info-card">
+        <div class="info-card-icon">👘</div>
+        <div class="info-card-title">服装について</div>
+        <div class="info-card-body">服装に決まりはありません。<strong>普段着でお越しください。</strong>スーツでも、カジュアルでも大丈夫です。</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">💴</div>
+        <div class="info-card-title">お布施・費用について</div>
+        <div class="info-card-body">参拝は<strong>無料</strong>です。お布施や初穂料は不要です。お気持ちがあれば賽銭箱へどうぞ。</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">🙏</div>
+        <div class="info-card-title">入信の勧誘について</div>
+        <div class="info-card-body">無理にお誘いすることは<strong>一切ありません。</strong>ご自身のペースでお越しください。</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">👨‍👩‍👧</div>
+        <div class="info-card-title">子ども連れについて</div>
+        <div class="info-card-body">ご家族でのお参りを<strong>歓迎</strong>しています。子どもたちも一緒にどうぞ。</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📅</div>
+        <div class="info-card-title">月次祭以外のお参り</div>
+        <div class="info-card-body">月次祭の日以外でも参拝を受け付けています。事前にお電話いただけるとスムーズです。</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">❓</div>
+        <div class="info-card-title">わからないことがあれば</div>
+        <div class="info-card-body">境内にいる奉仕員に<strong>何でもお気軽に</strong>お尋ねください。丁寧にご案内します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="sec dark" id="access">
+  <div class="inner">
+    <div class="sec-eye">
+      <div class="eye-line"></div>
+      <span class="eye-text" style="color:rgba(255,255,255,0.5)">ACCESS / アクセス</span>
+    </div>
+    <div class="access-grid reveal">
+      <div class="access-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3278.6!2d135.6981!3d34.6953!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000f5c6c5000001%3A0x0!2z5aWI55yM55yM55Sw5aSn5aSn6aaZ6aaZ!5e0!3m2!1sja!2sjp!4v1"
+          title="生駒大教会 地図"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <div class="access-info-list">
+        <div class="access-info-item">
+          <div style="font-size:18px;color:var(--gold);margin-top:2px;flex-shrink:0">📍</div>
+          <div>
+            <div class="access-info-title">住所</div>
+            <div class="access-info-val">〒630-0251<br>奈良県生駒市谷田町820番地</div>
+          </div>
+        </div>
+        <div class="access-info-item">
+          <div style="font-size:18px;color:var(--gold);margin-top:2px;flex-shrink:0">📞</div>
+          <div>
+            <div class="access-info-title">電話番号</div>
+            <div class="access-info-val"><a href="tel:0743736031">0743-73-6031</a></div>
+          </div>
+        </div>
+        <div class="access-info-item">
+          <div style="font-size:18px;color:var(--gold);margin-top:2px;flex-shrink:0">🚃</div>
+          <div>
+            <div class="access-info-title">電車でお越しの方</div>
+            <div class="access-info-val">近鉄生駒線・生駒駅 北口より<br>徒歩 約7分<br>近鉄生駒ケーブル・鳥居前駅より<br>徒歩 約10分</div>
+          </div>
+        </div>
+        <div class="access-info-item">
+          <div style="font-size:18px;color:var(--gold);margin-top:2px;flex-shrink:0">🚗</div>
+          <div>
+            <div class="access-info-title">お車でお越しの方</div>
+            <div class="access-info-val">駐車場あり（台数に限りがあります）<br>お電話でご確認ください</div>
+          </div>
+        </div>
+        <div class="access-info-item">
+          <div style="font-size:18px;color:var(--gold);margin-top:2px;flex-shrink:0">📅</div>
+          <div>
+            <div class="access-info-title">月次祭</div>
+            <div class="access-info-val">毎月24日 午前10時〜<br>（服装自由・予約不要）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="inner reveal">
+    <h2>ご不明な点はお気軽に</h2>
+    <p>参拝の作法・日程・見学など、何でもお問い合わせください。<br>はじめての方を心よりお待ちしております。</p>
+    <a href="tel:0743736031" class="btn-dark">
+      📞　0743-73-6031 に電話する
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-inner">
+    <div>
+      <div class="ft-logo">天理教 生駒大教会</div>
+      <div class="ft-sub">TENRIKYO IKOMA GRAND CHURCH</div>
+    </div>
+    <div class="ft-info">
+      〒630-0251 奈良県生駒市谷田町820番地<br>
+      TEL：<a href="tel:0743736031">0743-73-6031</a><br>
+      近鉄生駒駅 北口より徒歩約7分
+    </div>
+  </div>
+  <div class="ft-copy">&copy; 天理教生駒大教会 All rights reserved.</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
